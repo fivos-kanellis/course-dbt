@@ -1,0 +1,45 @@
+version: 2
+
+sources:
+
+  - name: postgres # name of the source 
+    schema: public # this is the schema our raw data lives in
+    database: raw # this is the name of our database
+
+    quoting:
+      database: false
+      schema: false
+      identifier: false
+
+    freshness:
+      warn_after: {count: 24, period: hour}
+      error_after: {count: 48, period: hour}
+
+    tables:
+      - name: addresses
+        loaded_at_field: created_at
+        description: addresses
+
+      - name: events
+        loaded_at_field: created_at
+        description: events
+
+      - name: order_items
+        loaded_at_field: created_at
+        description: order_items
+
+      - name: orders
+        loaded_at_field: created_at
+        description: orders
+
+      - name: products
+        loaded_at_field: created_at
+        description: products
+
+      - name: promos
+        loaded_at_field: created_at
+        description: promos
+
+      - name: users
+        loaded_at_field: created_at
+        description: users
