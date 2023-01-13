@@ -4,9 +4,10 @@
 --=== How many users do we have? ===--
 
 --SQL:
+```
 SELECT count(1)
 FROM dev_db.dbt_fkanellisgmailcom.stg_postgres_users
-
+```
 --Results: 130 users
 
 --=== On average, how many orders do we receive per hour? ===--
