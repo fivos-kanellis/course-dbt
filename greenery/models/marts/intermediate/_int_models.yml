@@ -8,3 +8,9 @@ models:
   - name: int_user_level_orders
     description: User-level aggregate table
 
+
+  - name: int_product_events_agg
+    description: Product events summary
+  
+  - name: int_product_orders_agg
+    description: Product orders summary

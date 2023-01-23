@@ -1,0 +1,8 @@
+
+
+version: 2
+
+models: 
+  - name: dim_product_summary
+    description: product summary
+
