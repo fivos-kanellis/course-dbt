@@ -20,14 +20,11 @@ WHERE has_ordered
 
 
 ```
-SELECT div0(count(DISTINCT CASE 
-			WHEN repeat_customer
-				THEN user_id
-			END) , count(1)) AS repeat_rate
-FROM dev_db.dbt_fkanellisgmailcom.dim_user_summary
-WHERE has_ordered
+SELECT avg(total_session_duration)/60 as avg_hours_spent_on_site
+FROM dev_db.dbt_fkanellisgmailcom.dim_user_summary;
 
 ```
 
--- REPEAT_RATE
--- 0.798387
+-- Hours spent on site
+-- ~15hr / user
+
