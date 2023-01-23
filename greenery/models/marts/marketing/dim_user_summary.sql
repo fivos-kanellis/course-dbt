@@ -33,7 +33,6 @@ SELECT u.user_id
     ,s.cnt_page_views
     ,s.first_session_at
     ,s.last_session_at
-    ,o.user_id
     ,o.total_user_address_cnt
     ,o.first_order_dt
     ,o.last_order_dt
