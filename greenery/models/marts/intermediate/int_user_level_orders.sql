@@ -13,6 +13,7 @@ SELECT
     ,max(case when o.status = 'delivered' then o.created_at end) as last_delivered_order_dt
     ,max(case when o.status = 'shipped' then o.created_at end) as last_shipped_order_dt
     ,count(distinct o.order_id) as orders_total
+    ,orders_total>0 as has_ordered
     ,orders_total>1 as repeat_customer
     ,count(distinct case when o.address_id = u.address_id then o.order_id end) as orders_at_user_address
     ,count(distinct case when o.address_id <> u.address_id then o.order_id end) as orders_at_other_address  

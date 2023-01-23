@@ -39,6 +39,7 @@ SELECT u.user_id
     ,o.last_delivered_order_dt
     ,o.last_shipped_order_dt
     ,o.orders_total
+    ,o.has_ordered
     ,o.repeat_customer
     ,o.orders_at_user_address
     ,o.orders_at_other_address
