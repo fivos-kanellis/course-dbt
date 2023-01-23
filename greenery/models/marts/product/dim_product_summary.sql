@@ -4,7 +4,23 @@
   )
 }}
 
-select p.product_id
+
+WITH tmp_products as
+(SELECT *
+ FROM {{ ref('stg_postgres_products') }}
+)
+,tmp_orders_agg as 
+(SELECT *
+ FROM {{ ref('int_product_orders_agg')}}
+)
+
+,tmp_events_agg as 
+(SELECT *
+ FROM {{ ref('int_product_events_agg')}}
+)
+
+
+SELECT p.product_id
 ,p.name
 ,p.price
 ,p.inventory
@@ -18,9 +34,9 @@ select p.product_id
 ,e.unique_user_page_views
 ,e.added_to_cart
 ,e.unique_users_added_to_cart
-FROM {{ source('postgres', 'products') }} p
-LEFT JOIN {{ ref('int_product_orders_agg')}} o on p.product_id = o.product_id
-LEFT JOIN {{ ref('int_product_events_agg')}} e on p.product_id = e.product_id
+FROM tmp_products p
+LEFT JOIN tmp_orders_agg o on p.product_id = o.product_id
+LEFT JOIN tmp_events_agg e on p.product_id = e.product_id
 
 
 

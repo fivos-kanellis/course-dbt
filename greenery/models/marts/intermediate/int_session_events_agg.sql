@@ -4,6 +4,12 @@
   )
 }}
 
+
+with tmp_events as 
+(SELECT * 
+FROM {{ ref('stg_postgres_events') }}
+)
+
 SELECT user_id
     ,session_id
     ,sum(case when event_type = 'checkout' then 1 else 0 end) as cnt_checkout
@@ -14,5 +20,6 @@ SELECT user_id
     ,max(created_at) as last_session_event_at
     ,datediff('minutes', min(created_at),max(created_at)) as session_duration
     
-FROM {{ source('postgres', 'events') }}
+FROM tmp_events
 GROUP BY 1,2
+ 
