@@ -18,7 +18,7 @@ with user_sessions_agg as (
 )
 
 ,user_orders_agg as (
-  select * from {{ ref('int_session_events_agg')}}
+  select * from {{ ref('int_user_level_orders')}}
 )
 
 ,users as (
