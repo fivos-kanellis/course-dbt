@@ -1,9 +1,20 @@
 --##### WEEK 2 Project #####--
 
---=== 1. Question ===--
+--=== 1. What is our user repeat rate ===--
 
 ```
-SELECT count(1)
-FROM dev_db.dbt_fkanellisgmailcom.stg_postgres_users
+SELECT div0(count(DISTINCT CASE 
+			WHEN repeat_customer
+				THEN user_id
+			END) , count(1)) AS repeat_rate
+FROM dev_db.dbt_fkanellisgmailcom.dim_user_summary
+WHERE has_ordered
+
 ```
---Results: 130 users
+
+-- REPEAT_RATE
+-- 0.798387
+
+
+--=== 2. How long are people spending on our site ===--
+

@@ -12,6 +12,7 @@ SELECT user_id
     ,sum(case when event_type = 'page_view' then 1 else 0 end) as cnt_page_views
     ,min(created_at) as first_session_event_at
     ,max(created_at) as last_session_event_at
+    ,datediff('minutes', min(created_at),max(created_at)) as session_duration
     
 FROM {{ source('postgres', 'events') }}
 GROUP BY 1,2
