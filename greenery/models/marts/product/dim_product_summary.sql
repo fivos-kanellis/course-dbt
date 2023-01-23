@@ -5,6 +5,9 @@
 }}
 
 select p.product_id
+,p.name
+,p.price
+,p.inventory
 ,o.orders
 ,o.total_ordered_quantity
 ,o.users_ordered
