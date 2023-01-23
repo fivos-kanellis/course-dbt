@@ -34,6 +34,7 @@ SELECT u.user_id
     ,s.cnt_page_views
     ,s.first_session_at
     ,s.last_session_at
+    ,s.total_session_duration
     ,o.total_user_address_cnt
     ,o.first_order_dt
     ,o.last_order_dt
