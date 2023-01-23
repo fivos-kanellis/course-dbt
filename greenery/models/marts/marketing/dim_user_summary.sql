@@ -13,6 +13,7 @@ with user_sessions_agg as (
     ,sum(cnt_page_views) as cnt_page_views
     ,min(first_session_event_at) as first_session_at
     ,max(last_session_event_at) as last_session_at
+    ,sum(session_duration) as total_session_duration
   from {{ ref('int_session_events_agg')}}
   GROUP BY 1
 )
