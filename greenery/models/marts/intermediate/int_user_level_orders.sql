@@ -7,14 +7,14 @@
 
 SELECT
     u.user_id
-    ,count(distinct o.address_id) as order_address_cnt
-    ,count(distinct case when o.address_id = u.address_id then o.order_id end) as orders_at_user_address
-    ,count(distinct case when o.address_id <> u.address_id then o.order_id end) as orders_at_other_address    
+    ,count(distinct o.address_id) as total_user_address_cnt
     ,min(o.created_at) as first_order_dt
     ,max(o.created_at) as last_order_dt
     ,max(case when o.status = 'delivered' then o.created_at end) as last_delivered_order_dt
     ,max(case when o.status = 'shipped' then o.created_at end) as last_shipped_order_dt
     ,count(distinct o.order_id) as orders_total
+    ,count(distinct case when o.address_id = u.address_id then o.order_id end) as orders_at_user_address
+    ,count(distinct case when o.address_id <> u.address_id then o.order_id end) as orders_at_other_address  
     ,count(distinct case when o.status = 'delivered' then o.order_id end) as orders_delivered
     ,count(distinct case when o.status = 'shipped' then o.order_id end) as orders_shipped
     ,count(distinct case when o.status = 'preparing' then o.order_id end) as orders_preparing
