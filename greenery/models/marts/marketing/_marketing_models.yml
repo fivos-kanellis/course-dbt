@@ -1,0 +1,7 @@
+
+
+version: 2
+
+models: 
+  - name: dim_user_summary
+    description: User summary of orders and int_sessions
