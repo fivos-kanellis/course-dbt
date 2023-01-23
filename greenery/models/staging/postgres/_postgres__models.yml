@@ -12,6 +12,12 @@ models:
 
   - name: stg_postgres_orders
     description: Unique orders on Greenery platform
+    columns:
+      - name: order_id
+        description: unique identifier for an order
+        tests:
+          - not_null 
+          - unique
 
   - name: stg_postgres_products
     description: Products on Greenery platform

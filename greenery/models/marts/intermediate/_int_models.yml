@@ -1,0 +1,10 @@
+
+
+version: 2
+
+models: 
+  - name: int_session_events_agg
+    description: user session summary
+  - name: int_user_level_orders
+    description: User-level aggregate table
+
