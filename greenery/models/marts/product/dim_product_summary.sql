@@ -18,7 +18,7 @@ select p.product_id
 FROM {{ source('postgres', 'products') }} p
 LEFT JOIN {{ ref('int_product_orders_agg')}} o on p.product_id = o.product_id
 LEFT JOIN {{ ref('int_product_events_agg')}} e on p.product_id = e.product_id
-GROUP BY 1
+
 
 
 
