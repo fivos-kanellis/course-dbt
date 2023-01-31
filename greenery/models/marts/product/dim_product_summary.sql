@@ -30,6 +30,7 @@ SELECT p.product_id
 ,o.orders_with_promo
 ,o.first_ordered_at
 ,o.last_ordered_at
+,e.unique_sessions
 ,e.page_views
 ,e.unique_user_page_views
 ,e.added_to_cart
