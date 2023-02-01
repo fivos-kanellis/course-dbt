@@ -13,7 +13,7 @@ with user_sessions_agg as (
     ,sum(cnt_page_views) as cnt_page_views
     ,min(first_session_event_at) as first_session_at
     ,max(last_session_event_at) as last_session_at
-    ,sum(session_duration) as total_session_duration
+    ,sum(session_duration_minutes) as total_session_duration_minutes
   from {{ ref('int_session_events_agg')}}
   GROUP BY 1
 )
@@ -34,7 +34,7 @@ SELECT u.user_id
     ,s.cnt_page_views
     ,s.first_session_at
     ,s.last_session_at
-    ,s.total_session_duration
+    ,s.total_session_duration_minutes
     ,o.total_user_address_cnt
     ,o.first_order_dt
     ,o.last_order_dt
