@@ -6,14 +6,12 @@
 
 
 {%-
-  set order_status = dbt_utils.get_column_values(
+  set order_statuses = dbt_utils.get_column_values(
     table = ref('stg_postgres_orders')
     , column = 'order_status'
     , order_by = 'order_status asc')
   
   -%}
-
-
 
 WITH tmp_users as
 (SELECT *
@@ -40,8 +38,8 @@ SELECT
     ,orders_total>1 as repeat_customer
     ,count(distinct case when o.address_id = u.address_id then o.order_id end) as orders_at_user_address
     ,count(distinct case when o.address_id <> u.address_id then o.order_id end) as orders_at_other_address  
-    {%- for event_type in event_types %}
-    , count(distinct case when o.order_status = '{{ order_status }}' o.order_id end) as orders_{{ order_type }}
+    {%- for order_status in order_statuses %}
+    , count(distinct case when o.order_status = '{{ order_status }}' then o.order_id end) as orders_{{ order_status }}
      {%- endfor %}
     --,count(distinct case when o.order_status = 'delivered' then o.order_id end) as orders_delivered
     --,count(distinct case when o.order_status = 'shipped' then o.order_id end) as orders_shipped

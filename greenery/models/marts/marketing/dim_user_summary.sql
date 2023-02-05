@@ -7,12 +7,10 @@
 with user_sessions_agg as (
   SELECT user_id
     ,count(distinct session_id) as unique_sessions
-    
-
     ,sum(cnt_checkout) as cnt_checkout
     ,sum(cnt_package_shipped) as cnt_package_shipped
     ,sum(cnt_add_to_cart) as cnt_add_to_cart
-    ,sum(cnt_page_views) as cnt_page_views
+    ,sum(cnt_page_view) as cnt_page_views
     ,min(first_session_event_at) as first_session_at
     ,max(last_session_event_at) as last_session_at
     ,sum(session_duration_minutes) as total_session_duration_minutes

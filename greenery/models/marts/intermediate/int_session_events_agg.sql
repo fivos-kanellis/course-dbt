@@ -36,7 +36,7 @@ SELECT e.user_id
     --,sum(case when e.event_type = 'checkout' then 1 else 0 end) as cnt_checkout
     --,sum(case when e.event_type = 'package_shipped' then 1 else 0 end) as cnt_package_shipped
     --,sum(case when e.event_type = 'add_to_cart' then 1 else 0 end) as cnt_add_to_cart
-    --,sum(case when e.event_type = 'page_view' then 1 else 0 end) as cnt_page_views
+    --,sum(case when e.event_type = 'page_view' then 1 else 0 end) as cnt_page_view
     ,min(e.created_at) as first_session_event_at
     ,max(e.created_at) as last_session_event_at
     ,datediff('minutes', min(e.created_at),max(e.created_at)) as session_duration_minutes
