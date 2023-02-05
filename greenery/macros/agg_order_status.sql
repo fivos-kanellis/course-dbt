@@ -1,12 +1,12 @@
 
-{% macro get_event_types() %}
-{ % SET agg_event_types % }
+{% macro get_order_status() %}
+{ % SET agg_order_status_count % }
 
-SELECT DISTINCT event_type
-FROM {{ ref('STG_POSTGRES_EVENTS') }}
+SELECT DISTINCT order_status
+FROM {{ ref('STG_POSTGRES_ORDERS') }}
 ORDER BY 1 { % endset % }
 
-{% set results = run_query(agg_event_types) %}
+{% set results = run_query(agg_order_status_count) %}
 
 {% if execute %}
 -- Return the first column 

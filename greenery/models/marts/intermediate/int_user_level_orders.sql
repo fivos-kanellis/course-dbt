@@ -5,6 +5,16 @@
 }}
 
 
+{%-
+  set order_status = dbt_utils.get_column_values(
+    table = ref('stg_postgres_orders')
+    , column = 'order_status'
+    , order_by = 'order_status asc')
+  
+  -%}
+
+
+
 WITH tmp_users as
 (SELECT *
  FROM {{ ref('stg_postgres_users') }}
@@ -30,9 +40,12 @@ SELECT
     ,orders_total>1 as repeat_customer
     ,count(distinct case when o.address_id = u.address_id then o.order_id end) as orders_at_user_address
     ,count(distinct case when o.address_id <> u.address_id then o.order_id end) as orders_at_other_address  
-    ,count(distinct case when o.order_status = 'delivered' then o.order_id end) as orders_delivered
-    ,count(distinct case when o.order_status = 'shipped' then o.order_id end) as orders_shipped
-    ,count(distinct case when o.order_status = 'preparing' then o.order_id end) as orders_preparing
+    {%- for event_type in event_types %}
+    , count(distinct case when o.order_status = '{{ order_status }}' o.order_id end) as orders_{{ order_type }}
+     {%- endfor %}
+    --,count(distinct case when o.order_status = 'delivered' then o.order_id end) as orders_delivered
+    --,count(distinct case when o.order_status = 'shipped' then o.order_id end) as orders_shipped
+    --,count(distinct case when o.order_status = 'preparing' then o.order_id end) as orders_preparing
     ,count(distinct case when o.order_status = 'shipped' and estimated_delivery_at < delivered_at then o.order_id end) as orders_shipped_est_late
     ,count(distinct case when o.order_status = 'delivered' and estimated_delivery_at < delivered_at then o.order_id end) as orders_delivered_late
     ,count(distinct case when o.shipping_service = 'ups' then o.order_id end) as orders_via_ups_total

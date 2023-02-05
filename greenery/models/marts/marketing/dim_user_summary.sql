@@ -7,6 +7,8 @@
 with user_sessions_agg as (
   SELECT user_id
     ,count(distinct session_id) as unique_sessions
+    
+
     ,sum(cnt_checkout) as cnt_checkout
     ,sum(cnt_package_shipped) as cnt_package_shipped
     ,sum(cnt_add_to_cart) as cnt_add_to_cart

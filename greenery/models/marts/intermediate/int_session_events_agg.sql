@@ -26,14 +26,13 @@ FROM tmp_events e
 WHERE order_id IS NOT NULL
 )
 
-
 SELECT e.user_id
     ,e.session_id
     ,coalesce(c.is_converted_session, FALSE) as is_converted_session
     ,c.order_id as converted_session_order_id
     {%- for event_type in event_types %}
     , sum(case when event_type = '{{ event_type }}' then 1 else 0 end) as cnt_{{ event_type }}
-     {%- endfor %})
+     {%- endfor %}
     --,sum(case when e.event_type = 'checkout' then 1 else 0 end) as cnt_checkout
     --,sum(case when e.event_type = 'package_shipped' then 1 else 0 end) as cnt_package_shipped
     --,sum(case when e.event_type = 'add_to_cart' then 1 else 0 end) as cnt_add_to_cart
